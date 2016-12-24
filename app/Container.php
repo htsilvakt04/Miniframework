@@ -3,8 +3,17 @@ namespace App;
 use ArrayAccess;
 class Container implements ArrayAccess
 {
-  protected $items = [];
+  public $items = [];
   protected $cache = [];
+  public function __construct(array $items = [])
+  {
+    foreach($items as $key => $item) {
+      $this->offsetSet($key,$item);
+    }
+  }
+  //offsetSet: use to set the element in ITEMS property
+  //           set the key equal $offset
+  //           set the value equal $value
   public function offsetSet($offset, $value)
   {
     $this->items[$offset] = $value;
@@ -38,7 +47,7 @@ class Container implements ArrayAccess
   {
     return $this->offsetExists($offset);
   }
-  
+
   public function __get($property)
   {
     return $this->offsetGet($property);

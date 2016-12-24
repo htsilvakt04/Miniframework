@@ -1,7 +1,6 @@
 <?php
 require("vendor/autoload.php");
 $app = new App\App;
-
 $container = $app->getContainer();
 
 $container["config"] = function () {
@@ -21,4 +20,8 @@ $container["db"] = function ($c) {
     $c->config['db_password']
   );
 };
-var_dump($container->db);
+
+$app->get("/", function () {
+  echo "homepage";
+});
+$app->run();
